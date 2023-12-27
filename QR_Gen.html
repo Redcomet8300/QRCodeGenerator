@@ -7,18 +7,28 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
             text-align: center;
-            margin: 20px;
+            padding: 10px;
         }
 
         h1 {
-            margin-bottom: 20px;
+            margin: 0;
         }
 
         .tabs {
             display: flex;
             justify-content: space-around;
             margin-bottom: 20px;
+            background-color: #f0f0f0;
+            padding: 10px;
         }
 
         .tab {
@@ -30,16 +40,26 @@
         }
 
         .tab:hover {
-            background-color: #f0f0f0;
+            background-color: #ddd;
         }
 
-        #link, #text, #location, #gmail {
+        #link, #text, #location, #gmail, #size-input {
             display: none;
             margin-top: 20px;
         }
 
         #qr-code {
             margin-top: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            margin-right: 10px;
         }
 
         button {
@@ -68,7 +88,9 @@
     </style>
 </head>
 <body>
-    <h1>QR Code Generator</h1>
+    <header>
+        <h1>QR Code Generator</h1>
+    </header>
     
     <div class="tabs">
         <div class="tab" onclick="showSection('link')">Link</div>
@@ -96,9 +118,11 @@
         <label for="gmail-input">Gmail:</label>
         <input type="text" id="gmail-input" placeholder="Enter Gmail">
     </div>
-
-    <label for="color">Color:</label>
-    <input type="color" id="color" value="#000000">
+        <div class="input-group">
+            <label for="color">Color:</label>
+            <input type="color" id="color" value="#000000">
+        </div>
+    </div>
 
     <button onclick="generateQRCode()">Generate QR Code</button>
 
@@ -130,11 +154,12 @@
 
             const qrCode = new QRCode(document.getElementById("qr-code"), {
                 text: data,
-                width: 128,
-                height: 128,
+                width: size,
+                height: size,
                 colorDark: color,
             });
 
+            // Add download buttons
             addDownloadButton('png', 'Download PNG', qrCode, 'image/png');
             addDownloadButton('svg', 'Download SVG', qrCode, 'image/svg+xml');
             addDownloadButton('gif', 'Download GIF', qrCode, 'image/gif');
