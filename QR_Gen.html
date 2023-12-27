@@ -52,16 +52,6 @@
             margin-top: 20px;
         }
 
-        .input-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .input-group label {
-            margin-right: 10px;
-        }
-
         button {
             padding: 10px 20px;
             font-size: 16px;
@@ -100,29 +90,32 @@
     </div>
 
     <div id="link">
-        <label for="link-input">Link:</label>
+        <label for="link-input">Link :</label>
         <input type="text" id="link-input" placeholder="Enter link">
     </div>
 
     <div id="text">
-        <label for="text-input">Text:</label>
+        <label for="text-input">Text :</label>
         <input type="text" id="text-input" placeholder="Enter text">
     </div>
 
     <div id="location">
-        <label for="location-input">Location:</label>
+        <label for="location-input">Location :</label>
         <input type="text" id="location-input" placeholder="Enter location">
     </div>
 
     <div id="gmail">
-        <label for="gmail-input">Gmail:</label>
+        <label for="gmail-input">Gmail :</label>
         <input type="text" id="gmail-input" placeholder="Enter Gmail">
     </div>
-        <div class="input-group">
-            <label for="color">Color:</label>
-            <input type="color" id="color" value="#000000">
-        </div>
+
+    <div id="size-input">
+        <label for="size">Size :</label>
+        <input type="number" id="size" placeholder="Enter size" min="1" value="128">
     </div>
+
+    <label for="color">Color :</label>
+    <input type="color" id="color" value="#000000">
 
     <button onclick="generateQRCode()">Generate QR Code</button>
 
@@ -132,7 +125,7 @@
     <script src="https://cdn.rawgit.com/jnordberg/gif.js/0.2.0/dist/gif.js"></script>
     <script>
         function showSection(section) {
-            const sections = ['link', 'text', 'location', 'gmail'];
+            const sections = ['link', 'text', 'location', 'gmail', 'size-input'];
             sections.forEach(s => {
                 const element = document.getElementById(s);
                 if (s === section) {
@@ -148,6 +141,7 @@
             const text = document.getElementById('text-input').value;
             const location = document.getElementById('location-input').value;
             const gmail = document.getElementById('gmail-input').value;
+            const size = document.getElementById('size').value;
             const color = document.getElementById('color').value;
 
             const data = `${link}\n${text}\n${location}\n${gmail}`;
