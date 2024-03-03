@@ -131,7 +131,18 @@
     <script src="https://cdn.rawgit.com/jnordberg/gif.js/0.2.0/dist/gif.js"></script>
     <script>
         let isGenerated = false; // Flag to track whether QR code is generated or not
-
+    
+        function showSection(sectionId) {
+            // Hide all sections
+            document.getElementById('link').style.display = 'none';
+            document.getElementById('text').style.display = 'none';
+            document.getElementById('location').style.display = 'none';
+            document.getElementById('gmail').style.display = 'none';
+    
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block';
+        }
+    
         function generateQRCode() {
             if (isGenerated) {
                 // If QR code is already generated, refresh the page
@@ -142,25 +153,25 @@
                 const location = document.getElementById('location-input').value;
                 const gmail = document.getElementById('gmail-input').value;
                 const color = document.getElementById('color').value;
-
+    
                 const data = `${link}\n${text}\n${location}\n${gmail}`;
-
+    
                 const qrCode = new QRCode(document.getElementById("qr-code"), {
                     text: data,
-                    colorDark: color,
+                    colorDark: color, // Set the color of the dark modules (squares)
                 });
-
+    
                 // Add download buttons
                 addDownloadButton('png', 'Download PNG', qrCode, 'image/png');
                 addDownloadButton('svg', 'Download SVG', qrCode, 'image/svg+xml');
                 addDownloadButton('gif', 'Download GIF', qrCode, 'image/gif');
-
+    
                 // Update the flag and disable the "Generate QR Code" button
                 isGenerated = true;
                 document.getElementById('generateButton').disabled = true;
             }
         }
-
+    
         function addDownloadButton(format, label, qrCode, mimeType) {
             const button = document.createElement('button');
             button.textContent = label;
@@ -168,7 +179,7 @@
             button.addEventListener('click', () => downloadQRCode(qrCode, format, mimeType));
             document.body.appendChild(button);
         }
-
+    
         function downloadQRCode(qrCode, format, mimeType) {
             const dataURL = qrCode._el.firstChild.toDataURL(mimeType);
             const link = document.createElement('a');
@@ -177,6 +188,7 @@
             link.click();
         }
     </script>
+    
 </body>
 
 </html>
